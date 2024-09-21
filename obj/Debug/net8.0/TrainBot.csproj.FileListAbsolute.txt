@@ -1,0 +1,17 @@
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\TrainBot.exe
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\TrainBot.deps.json
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\TrainBot.runtimeconfig.json
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\TrainBot.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\TrainBot.pdb
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\Telegram.Bot.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.csproj.AssemblyReference.cache
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.AssemblyInfoInputs.cache
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.AssemblyInfo.cs
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.csproj.CoreCompileInputs.cache
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.csproj.Up2Date
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\refint\TrainBot.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.pdb
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.genruntimeconfig.cache
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\ref\TrainBot.dll
