@@ -9,6 +9,7 @@ namespace TrainBot
                 var config = Config.LoadConfig();
                 var botClient = new TelegramBotClient(config.TelegramBotToken);
                 Console.WriteLine($"Tokent Bot:{config.TelegramBotToken}");
+                Console.WriteLine("proverka");
 
 
         }
