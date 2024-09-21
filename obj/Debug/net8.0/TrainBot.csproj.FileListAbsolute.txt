@@ -15,3 +15,8 @@ C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\refint\TrainBot
 C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.pdb
 C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.genruntimeconfig.cache
 C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\ref\TrainBot.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\kirill\RiderProjects\TrainBot\TrainBot\obj\Debug\net8.0\TrainBot.sourcelink.json

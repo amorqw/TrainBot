@@ -1,17 +1,16 @@
-﻿using System.IO;
-using Microsoft.Extensions.Configuration;
+﻿using Telegram.Bot;
 
-class Program
+namespace TrainBot
 {
-    static void Main(string[] args)
+    class Program
     {
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
+        static void Main(string[] args)
+        {
+                var config = Config.LoadConfig();
+                var botClient = new TelegramBotClient(config.TelegramBotToken);
+                Console.WriteLine($"Tokent Bot:{config.TelegramBotToken}");
 
-        string botToken = configuration["BotToken"];
-        
-        System.Console.ReadLine();
+
+        }
     }
 }
