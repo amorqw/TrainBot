@@ -1,40 +1,57 @@
-﻿using System;
+﻿using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.Bot;
+using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 
 namespace TrainBot
 {
+    
     class Program
     {
+        private static TelegramBotClient bot;
         static void Main(string[] args)
         {
             var config = Config.LoadConfig();
-            var сlient = new TelegramBotClient(config.TelegramBotToken);
-            сlient.StartReceiving(Update, Error);//тема будет обрабатывать обновы и ошибки
             Console.WriteLine($"Tokent Bot:{config.TelegramBotToken}");
             Console.WriteLine("proverka");
             Console.ReadLine();
+            using var cts = new CancellationTokenSource();
+            var bot = new TelegramBotClient(config.TelegramBotToken, cancellationToken: cts.Token);
+            var me = bot.GetMeAsync().Result;
+            bot.OnError += OnError;
+            bot.OnMessage += OnMessage;
+            bot.OnUpdate += OnUpdate;
 
+            cts.Cancel();
         }
 
-        async private static Task Update(ITelegramBotClient botClient, Update update, CancellationToken token) 
+        async Task OnError(Exception exception, HandleErrorSource source)
         {
-            var message = update.Message;
-            if (message != null):
+            Console.WriteLine(exception); // just dump the exception to the console
+        }
+
+// method that handle messages received by the bot:
+        async Task OnMessage(Message msg, UpdateType type)
+        {
+            if (msg.Text == "/start")
             {
-                if (message.Text.ToLower().Contains("прив"))
-                {
-                    await botClient.SendTextMessageAsync(message.Chat.Id, "Привет!");
-                    return;
-                }
+                await bot.SendTextMessageAsync(msg.Chat, "Welcome! Pick one direction",
+                    replyMarkup: new InlineKeyboardMarkup().AddButtons("Left", "Right"));
             }
         }
 
-        async private static Task Error(ITelegramBotClient botClient, Update update, CancellationToken token)
+// method that handle other types of updates received by the bot:
+        async Task OnUpdate(Update update)
         {
-            
+            if (update is { CallbackQuery: { } query }) // non-null CallbackQuery
+            {
+                await bot.AnswerCallbackQueryAsync(query.Id, $"You picked {query.Data}");
+                await bot.SendTextMessageAsync(query.Message!.Chat, $"User {query.From} clicked on {query.Data}");
+            }
         }
     }
 }

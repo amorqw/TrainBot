@@ -4,7 +4,7 @@ namespace TrainBot
 {
     public class Config
     {
-        public string TelegramBotToken { get; set; }
+        public string TelegramBotToken { get; }
 
         public static Config LoadConfig()
         {
