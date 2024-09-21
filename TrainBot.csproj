@@ -13,7 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DB\" />
       <Folder Include="Models\" />
       <Folder Include="Services\" />
     </ItemGroup>
