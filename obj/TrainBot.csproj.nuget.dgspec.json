@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kirill\\RiderProjects\\TrainBot\\TrainBot\\TrainBot.csproj": {}
+    "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\TrainBot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kirill\\RiderProjects\\TrainBot\\TrainBot\\TrainBot.csproj": {
+    "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\TrainBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kirill\\RiderProjects\\TrainBot\\TrainBot\\TrainBot.csproj",
+        "projectUniqueName": "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\TrainBot.csproj",
         "projectName": "TrainBot",
-        "projectPath": "C:\\Users\\kirill\\RiderProjects\\TrainBot\\TrainBot\\TrainBot.csproj",
+        "projectPath": "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\TrainBot.csproj",
         "packagesPath": "C:\\Users\\kirill\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kirill\\RiderProjects\\TrainBot\\TrainBot\\obj\\",
+        "outputPath": "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kirill\\AppData\\Roaming\\NuGet\\NuGet.Config",

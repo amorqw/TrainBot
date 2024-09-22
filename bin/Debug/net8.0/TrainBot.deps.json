@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v8.0": {
       "TrainBot/1.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "9.0.0-rc.1.24431.7",
           "Newtonsoft.Json": "13.0.3",
           "Telegram.Bot": "21.11.0"
         },
@@ -16,58 +15,33 @@
           "TrainBot.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration/9.0.0-rc.1.24431.7": {
+      "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.0-rc.1.24431.7",
-          "Microsoft.Extensions.Primitives": "9.0.0-rc.1.24431.7"
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Configuration.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.43107"
-          }
-        }
-      },
-      "Microsoft.Extensions.Configuration.Abstractions/9.0.0-rc.1.24431.7": {
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.0-rc.1.24431.7"
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.43107"
-          }
+          "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
       "Microsoft.Extensions.Configuration.Binder/8.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.0-rc.1.24431.7"
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {},
       "Microsoft.Extensions.Options/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
-          "Microsoft.Extensions.Primitives": "9.0.0-rc.1.24431.7"
+          "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
       "Microsoft.Extensions.Options.ConfigurationExtensions/8.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.0-rc.1.24431.7",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Configuration.Binder": "8.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Microsoft.Extensions.Options": "8.0.0",
-          "Microsoft.Extensions.Primitives": "9.0.0-rc.1.24431.7"
+          "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.0-rc.1.24431.7": {
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.24.43107"
-          }
-        }
-      },
+      "Microsoft.Extensions.Primitives/8.0.0": {},
       "Newtonsoft.Json/13.0.3": {
         "runtime": {
           "lib/net6.0/Newtonsoft.Json.dll": {
@@ -102,19 +76,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.Extensions.Configuration/9.0.0-rc.1.24431.7": {
+    "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-uEAjIHD+iMZKDQHgSk8hHgGwIMF29G2OyEu1EZUzcG960MeFQq8dvvqcU/xkhkIOBa/Caz9JAouGTdi5tUp2aA==",
-      "path": "microsoft.extensions.configuration/9.0.0-rc.1.24431.7",
-      "hashPath": "microsoft.extensions.configuration.9.0.0-rc.1.24431.7.nupkg.sha512"
-    },
-    "Microsoft.Extensions.Configuration.Abstractions/9.0.0-rc.1.24431.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ijTDu7t3u9rpwRHAwgb3mhyPkM0gKwbaFszhQJ0KIU35L+BwuoWjEZxl7/7DYqKUfQV3BZMnUl3xGfWiTl/+/A==",
-      "path": "microsoft.extensions.configuration.abstractions/9.0.0-rc.1.24431.7",
-      "hashPath": "microsoft.extensions.configuration.abstractions.9.0.0-rc.1.24431.7.nupkg.sha512"
+      "sha512": "sha512-3lE/iLSutpgX1CC0NOW70FJoGARRHbyKmG7dc0klnUZ9Dd9hS6N/POPWhKhMLCEuNN5nXEY5agmlFtH562vqhQ==",
+      "path": "microsoft.extensions.configuration.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Binder/8.0.0": {
       "type": "package",
@@ -144,12 +111,12 @@
       "path": "microsoft.extensions.options.configurationextensions/8.0.0",
       "hashPath": "microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Primitives/9.0.0-rc.1.24431.7": {
+    "Microsoft.Extensions.Primitives/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-o0oZEbXbuc3jY3KriFAoTNAeHzv3OCzCx5chpuB+ecoloBI+zpNup0ai8RuTe4Ky9ULK9TyAUC9hgIDX0NnjRw==",
-      "path": "microsoft.extensions.primitives/9.0.0-rc.1.24431.7",
-      "hashPath": "microsoft.extensions.primitives.9.0.0-rc.1.24431.7.nupkg.sha512"
+      "sha512": "sha512-bXJEZrW9ny8vjMF1JV253WeLhpEVzFo1lyaZu1vQ4ZxWUlVvknZ/+ftFgVheLubb4eZPSwwxBeqS1JkCOjxd8g==",
+      "path": "microsoft.extensions.primitives/8.0.0",
+      "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
