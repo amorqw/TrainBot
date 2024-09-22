@@ -5,6 +5,8 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types.ReplyMarkups;
 using System.Collections.Generic;
 using System;
+using Microsoft.VisualBasic;
+using Telegram.Bot.Requests;
 
 namespace TrainBot
 {
@@ -12,6 +14,7 @@ namespace TrainBot
     {
         private readonly TelegramBotClient _bot;
         private ReplyKeyboardMarkup _replyKeyboard;
+        
 
         public BotHandlers(TelegramBotClient bot)
         {
@@ -19,19 +22,17 @@ namespace TrainBot
             bot.OnMessage += OnMessage;
             bot.OnUpdate += OnUpdate;
             bot.OnError += OnError;
-            _replyKeyboard = new ReplyKeyboardMarkup(
-                new List<KeyboardButton[]>()
-                {
-                    new KeyboardButton[]
-                    {
-                        new KeyboardButton("Добавить упражнение"),
-                        new KeyboardButton("Скачать .pdf файл")
-                    }
-                })
-            {
-                ResizeKeyboard = true,
-            };
+            
         }
+
+        private InlineKeyboardMarkup _InlineKeyboard = new InlineKeyboardMarkup(new[]
+        {
+            new[]
+            {
+                InlineKeyboardButton.WithCallbackData("➕ Добавить упражнение", "Добавить упражнение"),
+                InlineKeyboardButton.WithCallbackData("📥 Скачать .pdf файл", "Скачать .pdf"),
+            }
+        });
         private Dictionary<long,string> _userStates = new Dictionary<long, string>();
         private Dictionary<long,string> _userName = new Dictionary<long, string>();
 
@@ -70,14 +71,22 @@ namespace TrainBot
                             else
                             {
                                 _userName[msg.Chat.Id] = msg.Text;
-                                await _bot.SendTextMessageAsync(msg.Chat.Id, $"Приятно познакомиться, {msg.Text}!");
                                 _userStates[msg.Chat.Id] = "selection_function";
-                                await _bot.SendTextMessageAsync(msg.Chat.Id, $"{_userName[msg.Chat.Id]},выбери функцию", replyMarkup: _replyKeyboard);
+                                await _bot.SendPhotoAsync(msg.Chat.Id,
+                                    "https://avatars.dzeninfra.ru/get-zen_doc/1616946/pub_5e35338152d3287a8c81fdcf_5e355e32ebb18a27f5041990/scale_1200",
+                                    caption: $"Приятно познакомиться,{msg.Text}\nВыбери действие", replyMarkup: _InlineKeyboard);
+                                _userStates[msg.Chat.Id] = "star221t";
 
                             }
                             break;
                         case "selection_function":
-                            
+                            break;
+                        case "input_exercise":
+                        //to do Добавлять введенный текст в БД
+                        case "selection_pdf":
+                            break;
+                        default:
+                            await _bot.SendTextMessageAsync(msg.Chat.Id, "Возможно вы ввели неизвестную команду, \nдля начала работы введите " +"/start");
                             break;
                     }
                     break;
@@ -89,10 +98,21 @@ namespace TrainBot
             if (update.CallbackQuery != null)
             {
                 var query = update.CallbackQuery;
-                await _bot.AnswerCallbackQueryAsync(query.Id, $"You picked {query.Data}");
+                await _bot.AnswerCallbackQueryAsync(query.Id, $"Вы выбрали: {query.Data}");
                 await _bot.SendTextMessageAsync(query.Message.Chat.Id, 
                     $"User {query.From.Username}, {query.From.Id} clicked on {query.Data}");
+                switch (query.Data)
+                {
+                    case "Добавить упражнение":
+                        _userStates[query.Message.Chat.Id] = "input_exercise";
+                        
+                        break;
+                    case "Скачать .pdf":
+                        break;
+                }
             }
+
+            
         }
 
         private Task OnError(Exception exception, HandleErrorSource source)
