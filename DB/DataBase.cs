@@ -58,78 +58,34 @@ namespace TrainBot.DB
                 Console.WriteLine($"Ошибка при добавлении пользователя: {ex.Message}");
             }
         }
-
-
-        public void AddExercise(long userId, string exercise)
-        {
-            
-            try
-            {
-                using (var connection = new MySqlConnection(_connection.ConnectionString))
-                {
-                    connection.Open();
-                    string query = "INSERT INTO exercises(telegram_id, exercise_name) VALUES (@UserId, @Exercise)";
-                    using (var command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserId", userId);
-                        command.Parameters.AddWithValue("@Exercise", exercise);
-                        command.ExecuteNonQuery();
-                    }
-                    Console.WriteLine($"Упражнение {exercise} добавлено для пользователя с ID {userId}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-        public void AddWeight(long userId, int weight)
+        public void AddExercise(long telegram_id, string exercise_name , double weight, int repetitions, DateTime date)
         {
             try
             {
                 using (var connection = new MySqlConnection(_connection.ConnectionString))
                 {
                     connection.Open();
-                    string query = "UPDATE exercises SET weight = @Weight WHERE telegram_id = @UserId AND exercise_name = @ExerciseName";
+                    string query = "INSERT INTO exercises (telegram_id, exercise_name, Weight, Repetitions, Date) VALUES (@telegram_id, @exercise_name, @Weight, @Repetitions, @Date)";
                     using (var command = new MySqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@telegram_id", telegram_id);
+                        command.Parameters.AddWithValue("@exercise_name", exercise_name  ?? (object)DBNull.Value);
                         command.Parameters.AddWithValue("@Weight", weight);
-                        command.Parameters.AddWithValue("@UserId", userId);
-                        command.ExecuteNonQuery();
-                    }
-                    Console.WriteLine($"Вес {weight} добавлен для пользователя с ID {userId}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public void AddReps(long userId, int repetitions, DateTime date)
-        {
-            try
-            {
-                using (var connection = new MySqlConnection(_connection.ConnectionString))
-                {
-                    connection.Open();
-                    string query = "UPDATE exercises SET repetitions = @Repetitions, date = @Date WHERE telegram_id = @UserId AND exercise_name = @ExerciseName";
-                    using (var command = new MySqlCommand(query, connection))
-                    {
                         command.Parameters.AddWithValue("@Repetitions", repetitions);
                         command.Parameters.AddWithValue("@Date", date);
-                        command.Parameters.AddWithValue("@UserId", userId);
                         command.ExecuteNonQuery();
+
                     }
-                    Console.WriteLine($"Повторения {repetitions} и дата {date.ToShortDateString()} обновлены для пользователя с ID {userId}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Ошибка при добавлении упражнения: {ex}");
             }
         }
-        // Метод для получения всех упражнений пользователя
+
+
+        
         public void GetUserExercises(long userId)
         {
             try
@@ -142,6 +98,7 @@ namespace TrainBot.DB
                     using (var cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@UserId", userId);
+                        
 
                         using (var reader = cmd.ExecuteReader())
                         {

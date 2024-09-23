@@ -36,6 +36,7 @@ namespace TrainBot
         });
         private Dictionary<long,string> _userStates = new Dictionary<long, string>();
         private Dictionary<long,string> _userName = new Dictionary<long, string>();
+        
 
         
         
@@ -73,7 +74,7 @@ namespace TrainBot
                         case "start":
                             if(string.IsNullOrWhiteSpace(msg.Text))
                                 await _bot.SendTextMessageAsync(msg.Chat.Id,
-                                    "Вы вв22222ели пустую строку, повторите пожалуйста ввод и не оставляйте пустую строку ^_^");
+                                    "Вы ввели пустую строку, повторите пожалуйста ввод и не оставляйте пустую строку ^_^");
                             else
                             {
                                 _userName[msg.Chat.Id] = msg.Text;
@@ -88,17 +89,19 @@ namespace TrainBot
                         case "selection_function":
                             break;
                         case "input_exercise":
-                            _db.AddExercise(msg.From.Id, msg.Text);
-                            await _bot.SendTextMessageAsync(msg.Chat.Id,"Красава, какой вес делал?");
-                            _userStates[msg.Chat.Id] = "input_weight";
-                            break;
-                        case "input_weight":
-                            _db.AddWeight(msg.From.Id, int.Parse(msg.Text));
-                            await _bot.SendTextMessageAsync(msg.Chat.Id,"Настоящая горилла, сколько повторов сделал?");
-                            _userStates[msg.Chat.Id] = "input_reps";
-                            break;
-                        case"input_reps":
-                            _db.AddReps(msg.From.Id, int.Parse(msg.Text), DateTime.Now);
+                            var parts = msg.Text.Split(' ');
+                            if (parts.Length == 3)
+                            {
+                                _db.AddExercise(msg.From.Id, parts[0], double.Parse(parts[1]), int.Parse(parts[2]), DateTime.Now);
+                                await _bot.SendPhotoAsync(msg.Chat.Id,
+                                    "https://avatars.dzeninfra.ru/get-zen_doc/1711960/pub_5e88ce2901822a01b722c6a5_5e88dadb13cc2b78dcfaf0b1/scale_1200",
+                                    caption:"Красава, не опозорился\nМожешь ввести новое упражнение, либо скачать .pdf файл", replyMarkup: _InlineKeyboard );
+                            }
+                            else
+                            {
+                                await _bot.SendTextMessageAsync(msg.Chat.Id, "Некорректный формат. Используйте: <упражнение> <вес> <повторы>.");
+                            }
+                            
                             break;
                         case "selection_pdf":
                             break;
@@ -109,7 +112,7 @@ namespace TrainBot
                     break;
             }
         }
-
+        //To Do добавить кнопку назад, реализовать скачку pdf
         private async Task OnUpdate(Update update)
         {
             if (update.CallbackQuery != null)
@@ -121,8 +124,9 @@ namespace TrainBot
                 switch (query.Data)
                 {
                     case "Добавить упражнение":
+                        await _bot.SendTextMessageAsync(query.Message.Chat.Id,"Горилла, какое упражнение делал? С каким весом? Сколько раз?\n" +
+                                                                              "Введите в формате <Упражнение>  <Число вес>  <Число повторения>\nчерез пробел короче");
                         _userStates[query.Message.Chat.Id] = "input_exercise";
-                        await _bot.SendTextMessageAsync(query.Message.Chat.Id,"Какое упражнение делал?");
                         break;
                     case "Скачать .pdf":
                         break;
