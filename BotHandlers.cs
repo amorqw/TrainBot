@@ -73,7 +73,7 @@ namespace TrainBot
                         case "start":
                             if(string.IsNullOrWhiteSpace(msg.Text))
                                 await _bot.SendTextMessageAsync(msg.Chat.Id,
-                                    "Вы ввели пустую строку, повторите пожалуйста ввод и не оставляйте пустую строку ^_^");
+                                    "Вы вв22222ели пустую строку, повторите пожалуйста ввод и не оставляйте пустую строку ^_^");
                             else
                             {
                                 _userName[msg.Chat.Id] = msg.Text;
