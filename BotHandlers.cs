@@ -3,10 +3,8 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.ReplyMarkups;
-using System.Collections.Generic;
-using System;
-using Microsoft.VisualBasic;
-using Telegram.Bot.Requests;
+using TrainBot.DB;
+
 
 namespace TrainBot
 {
@@ -14,11 +12,14 @@ namespace TrainBot
     {
         private readonly TelegramBotClient _bot;
         private ReplyKeyboardMarkup _replyKeyboard;
+        private readonly DataBase _db;
         
 
-        public BotHandlers(TelegramBotClient bot)
+        public BotHandlers(TelegramBotClient bot, DataBase db)
         {
+            
             _bot = bot;
+            _db = db;
             bot.OnMessage += OnMessage;
             bot.OnUpdate += OnUpdate;
             bot.OnError += OnError;
@@ -40,8 +41,13 @@ namespace TrainBot
         
         private async Task OnMessage(Message msg, UpdateType type)
         {
-            Console.WriteLine($"Сообщение от пользователя {msg.From} (Id: {msg.MessageId} msg: {msg.Text})");
-
+            Console.WriteLine($"Сообщение от пользователя {msg.From} (Id: {msg.MessageId} msg: {msg.Text}), id пользователя: {msg.From.Id}");
+            if (!_db.UserExists(msg.From.Id))
+            {
+                // Если пользователя нет, добавляем его в таблицу `users`
+                _db.AddUser(msg.From.Id, msg.From.Username, msg.From.FirstName);
+                Console.WriteLine($"Пользователь {msg.From.Username} (ID: {msg.From.Id}) добавлен в базу данных.");
+            }
             if (msg.Text == null)
             {
                 await _bot.SendTextMessageAsync(msg.Chat.Id, "Бот понимает только текст, увы!");
@@ -67,7 +73,7 @@ namespace TrainBot
                         case "start":
                             if(string.IsNullOrWhiteSpace(msg.Text))
                                 await _bot.SendTextMessageAsync(msg.Chat.Id,
-                                    "Вы ввели пустую строку, повторите пожалуйста ввод и не оставляйте пустсую строку ^_^");
+                                    "Вы ввели пустую строку, повторите пожалуйста ввод и не оставляйте пустую строку ^_^");
                             else
                             {
                                 _userName[msg.Chat.Id] = msg.Text;
@@ -82,7 +88,18 @@ namespace TrainBot
                         case "selection_function":
                             break;
                         case "input_exercise":
-                        //to do Добавлять введенный текст в БД
+                            _db.AddExercise(msg.From.Id, msg.Text);
+                            await _bot.SendTextMessageAsync(msg.Chat.Id,"Красава, какой вес делал?");
+                            _userStates[msg.Chat.Id] = "input_weight";
+                            break;
+                        case "input_weight":
+                            _db.AddWeight(msg.From.Id, int.Parse(msg.Text));
+                            await _bot.SendTextMessageAsync(msg.Chat.Id,"Настоящая горилла, сколько повторов сделал?");
+                            _userStates[msg.Chat.Id] = "input_reps";
+                            break;
+                        case"input_reps":
+                            _db.AddReps(msg.From.Id, int.Parse(msg.Text), DateTime.Now);
+                            break;
                         case "selection_pdf":
                             break;
                         default:
@@ -105,14 +122,12 @@ namespace TrainBot
                 {
                     case "Добавить упражнение":
                         _userStates[query.Message.Chat.Id] = "input_exercise";
-                        
+                        await _bot.SendTextMessageAsync(query.Message.Chat.Id,"Какое упражнение делал?");
                         break;
                     case "Скачать .pdf":
                         break;
                 }
             }
-
-            
         }
 
         private Task OnError(Exception exception, HandleErrorSource source)
