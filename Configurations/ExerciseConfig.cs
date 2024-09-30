@@ -8,7 +8,9 @@ public class ExerciseConfig:IEntityTypeConfiguration<ExercisesTg>
 {
     public void Configure(EntityTypeBuilder<ExercisesTg> builder)
     {
-        builder.HasKey(e => e.TelegramId);
+        builder.HasKey(e => e.Id);
+        builder.Property(e => e.TelegramId)
+            .IsRequired();
         builder.Property(e => e.Exercise)
             .IsRequired()
             .HasMaxLength(100);

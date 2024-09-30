@@ -9,7 +9,7 @@ namespace TrainBot
 
         public static Config LoadConfig()
         {
-            var json = File.ReadAllText("..\\..\\..\\appsettings.json");
+            var json = File.ReadAllText("appsettings.json");
             return JsonConvert.DeserializeObject<Config>(json);
         }
     }

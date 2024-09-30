@@ -2,10 +2,10 @@
 
 public class UsersTg
 {
-    public Guid TelegramId { get; set; }
-    public string Username { get; set; }
+    public int TelegramId { get; set; }
+    public string Username { get; set; }= string.Empty;
     public DateTime? RegistrationDate { get; set; }
-    
-    public List<ExercisesTg> ExercisesTg { get; set; }
-    
+
+    public List<ExercisesTg> ExercisesTg { get; set; } = new List<ExercisesTg>();
+
 }

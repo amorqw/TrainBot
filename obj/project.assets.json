@@ -3764,24 +3764,26 @@
     ]
   },
   "packageFolders": {
-    "/home/amor/.nuget/packages/": {}
+    "C:\\Users\\kirill\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/amor/dev/TgBotyaraa/TrainBot.csproj",
+      "projectUniqueName": "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\TrainBot.csproj",
       "projectName": "TrainBot",
-      "projectPath": "/home/amor/dev/TgBotyaraa/TrainBot.csproj",
-      "packagesPath": "/home/amor/.nuget/packages/",
-      "outputPath": "/home/amor/dev/TgBotyaraa/obj/",
+      "projectPath": "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\TrainBot.csproj",
+      "packagesPath": "C:\\Users\\kirill\\.nuget\\packages\\",
+      "outputPath": "\\\\wsl$\\Ubuntu-22.04\\home\\amor\\dev\\TgBotyaraa\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/amor/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\kirill\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
         "https://pkgs.dev.azure.com/tgbots/Telegram.Bot/_packaging/release/nuget/v3/index.json": {}
       },
@@ -3795,6 +3797,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3844,7 +3851,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

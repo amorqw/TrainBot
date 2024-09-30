@@ -24,8 +24,11 @@ namespace TrainBot.Migrations
 
             modelBuilder.Entity("TrainBot.Models.ExercisesTg", b =>
                 {
-                    b.Property<Guid>("TelegramId")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .HasColumnType("longtext");
@@ -41,19 +44,26 @@ namespace TrainBot.Migrations
                     b.Property<int>("Repetitions")
                         .HasColumnType("int");
 
+                    b.Property<int>("TelegramId")
+                        .HasColumnType("int");
+
                     b.Property<float>("Weight")
                         .HasColumnType("float");
 
-                    b.HasKey("TelegramId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("TelegramId");
 
                     b.ToTable("ExercisesTg");
                 });
 
             modelBuilder.Entity("TrainBot.Models.UsersTg", b =>
                 {
-                    b.Property<Guid>("TelegramId")
+                    b.Property<int>("TelegramId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TelegramId"));
 
                     b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("datetime(6)");
