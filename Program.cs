@@ -24,10 +24,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         new MySqlServerVersion(new Version(9, 0, 1))));
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ExercisesService>();
+builder.Services.AddScoped<Pdf>();
 
 var serviceProvider = builder.Services.BuildServiceProvider();
 var botHandler = new BotHandlers(bot, serviceProvider.GetRequiredService<UserService>(), 
-    serviceProvider.GetRequiredService<ExercisesService>());
+    serviceProvider.GetRequiredService<ExercisesService>(), serviceProvider.GetRequiredService<Pdf>());
 
 var app = builder.Build();
 app.Run();
