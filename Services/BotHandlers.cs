@@ -1,4 +1,6 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
+using Microsoft.VisualBasic;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -124,7 +126,7 @@ namespace TrainBot.Services
         {
             var parts = msg.Text?.Split(' ');
 
-            if (parts?.Length == 3)
+            if (parts?.Length == 3 && int.TryParse(parts[1], out _) && int.TryParse(parts[2], out _))
             {
                 _exercisesService.AddExercise((int)msg.Chat.Id, (int)msg.From.Id, parts[0], float.Parse(parts[1]), int.Parse(parts[2]), DateTime.Now);
                 await _bot.SendPhotoAsync(msg.Chat.Id,
@@ -154,10 +156,29 @@ namespace TrainBot.Services
                             replyMarkup: BackButtonKeyboard);
                         _userStates[query.Message.Chat.Id] = "input_exercise";
                         break;
+
                     case "Скачать .pdf":
-                        _pdf.ManipulatePdf($"{query.From.Username}.pdf");
-                        
-                        break;
+                        var exercises = _exercisesService.GetUserExercises((int)query.From.Id);
+                        if (exercises == null || !exercises.Any())
+                        {
+                            await _bot.SendTextMessageAsync(query.Message.Chat.Id,
+                                "Введи хотя бы 1 упражнение пожалуйста");
+                            return;
+                        }
+                        else
+                        {
+                            string fileName = $"{query.From.Id}.pdf";
+                            _pdf.ManipulatePdf(fileName, exercises);
+
+                            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Pdf", fileName);
+                            {
+                                await using Stream stream = System.IO.File.OpenRead(filePath);
+                                await _bot.SendDocumentAsync(query.Message.Chat.Id,
+                                    document: InputFile.FromStream(stream, $"{query.Message.Chat.Id}.pdf"));
+                            }
+                            break; 
+                        }
+
                     case "Назад":
                         await _bot.DeleteMessageAsync(query.Message.Chat.Id, query.Message.MessageId);
                         

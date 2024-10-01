@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TrainBot.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdToExercisesTg : Migration
+    public partial class UpdateTelegramIdType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace TrainBot.Migrations
                 name: "UsersTg",
                 columns: table => new
                 {
-                    TelegramId = table.Column<int>(type: "int", nullable: false)
+                    TelegramId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -37,7 +37,7 @@ namespace TrainBot.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TelegramId = table.Column<int>(type: "int", nullable: false),
+                    TelegramId = table.Column<long>(type: "bigint", nullable: false),
                     Exercise = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Weight = table.Column<float>(type: "float", nullable: false),

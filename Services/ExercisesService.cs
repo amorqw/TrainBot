@@ -11,6 +11,7 @@ public class ExercisesService
     {
         _context = context;
     }
+    
 
     public void AddExercise(int Id,int userId, string exerciseName, float weight, int repetitions, DateTime date)
     {
@@ -24,5 +25,11 @@ public class ExercisesService
         };
         _context.ExercisesTg.Add(exercise);
         _context.SaveChanges();
+    }
+    public List<ExercisesTg> GetUserExercises(int userId)
+    {
+        return _context.ExercisesTg
+            .Where(e => e.TelegramId == userId)
+            .ToList();
     }
 }

@@ -12,8 +12,8 @@ using TrainBot.Data;
 namespace TrainBot.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240930114842_AddIdToExercisesTg")]
-    partial class AddIdToExercisesTg
+    [Migration("20241001152524_UpdateTelegramIdType")]
+    partial class UpdateTelegramIdType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,8 +47,8 @@ namespace TrainBot.Migrations
                     b.Property<int>("Repetitions")
                         .HasColumnType("int");
 
-                    b.Property<int>("TelegramId")
-                        .HasColumnType("int");
+                    b.Property<long>("TelegramId")
+                        .HasColumnType("bigint");
 
                     b.Property<float>("Weight")
                         .HasColumnType("float");
@@ -62,11 +62,11 @@ namespace TrainBot.Migrations
 
             modelBuilder.Entity("TrainBot.Models.UsersTg", b =>
                 {
-                    b.Property<int>("TelegramId")
+                    b.Property<long>("TelegramId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TelegramId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("TelegramId"));
 
                     b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("datetime(6)");

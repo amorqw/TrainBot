@@ -44,8 +44,8 @@ namespace TrainBot.Migrations
                     b.Property<int>("Repetitions")
                         .HasColumnType("int");
 
-                    b.Property<int>("TelegramId")
-                        .HasColumnType("int");
+                    b.Property<long>("TelegramId")
+                        .HasColumnType("bigint");
 
                     b.Property<float>("Weight")
                         .HasColumnType("float");
@@ -59,11 +59,11 @@ namespace TrainBot.Migrations
 
             modelBuilder.Entity("TrainBot.Models.UsersTg", b =>
                 {
-                    b.Property<int>("TelegramId")
+                    b.Property<long>("TelegramId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TelegramId"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("TelegramId"));
 
                     b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("datetime(6)");
