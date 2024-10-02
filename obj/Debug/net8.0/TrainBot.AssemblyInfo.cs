@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TrainBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74e31f74efe4adb99bd48b4b738ae265dde3724f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91df6a68f96ce5acb3224d92ac553924c2e2ce6d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TrainBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TrainBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
