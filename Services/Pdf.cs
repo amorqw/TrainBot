@@ -75,5 +75,18 @@ namespace TrainBot.Services
                 true);
         }
 
+        public void DelPdf(string FullPdfPath)
+        {
+            FileInfo fileInf = new FileInfo(FullPdfPath);
+            if (fileInf.Exists)
+            {
+                fileInf.Delete();
+            }
+            else
+            {
+                Console.WriteLine($"Файл по пути {FullPdfPath} не найден");
+            }
+        }
+
     }
 }

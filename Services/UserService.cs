@@ -1,4 +1,5 @@
-﻿using Telegram.Bot.Types;
+﻿using Microsoft.EntityFrameworkCore;
+
 using TrainBot.Data;
 using TrainBot.Models;
 
@@ -12,21 +13,23 @@ public class UserService
     {
         _context = context;
     }
-
     public bool UserExists(long userId)
     {
         return _context.UsersTg.Any(u => u.TelegramId ==  userId);
     }
-
-    public void UserAdd(int userId, string username)
+    public async Task UserAdd(long userId, string username)
     {
-        var user = new UsersTg
+        var existingUser = await _context.UsersTg.FirstOrDefaultAsync(u => u.TelegramId == userId);
+        if (existingUser == null)
         {
-            TelegramId = userId,
-            Username = username,
-            RegistrationDate = DateTime.Now
-        };
-        _context.UsersTg.Add(user);
-        _context.SaveChanges();
+            var newUser = new UsersTg
+            {
+                TelegramId = userId,
+                Username = username,
+                RegistrationDate = DateTime.Now
+            };
+            _context.UsersTg.Add(newUser);
+            await _context.SaveChangesAsync();
+        }
     }
 }
