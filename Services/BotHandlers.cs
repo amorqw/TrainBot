@@ -1,4 +1,4 @@
-﻿﻿using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -6,6 +6,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using System.Text.RegularExpressions;
 using System;
+
 namespace TrainBot.Services
 {
     public class BotHandlers
@@ -45,9 +46,9 @@ namespace TrainBot.Services
         });
 
         private Dictionary<long, string> _userStates = new Dictionary<long, string>();
-        private Dictionary<long, string> _usersExName= new Dictionary<long, string>();
-        private Dictionary<long, float> _usersExWeight= new Dictionary<long, float>();
-        private Dictionary<long, string> _usersExReps= new Dictionary<long, string>();
+        private Dictionary<long, string> _usersExName = new Dictionary<long, string>();
+        private Dictionary<long, float> _usersExWeight = new Dictionary<long, float>();
+        private Dictionary<long, string> _usersExReps = new Dictionary<long, string>();
 
         private async Task OnMessage(Message msg, UpdateType type)
         {
@@ -86,23 +87,12 @@ namespace TrainBot.Services
                         case "input_exerciseName":
                             _usersExName[msg.From.Id] = msg.Text;
                             _userStates[msg.Chat.Id] = "input_exerciseWeight";
+                            _bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId - 1);
                             await _bot.SendTextMessageAsync(msg.Chat.Id, "Красава,Теперь введи вес");
-                            /*var parts = msg.Text.Split(' ');
-                            if (parts.Length == 3)
-                            {
-                                _exercisesService.AddExercise((int)msg.Chat.Id,(int)msg.From.Id, parts[0], float.Parse(parts[1]), int.Parse(parts[2]), DateTime.Now);
-                                await _bot.SendPhotoAsync(msg.Chat.Id,
-                                    "https://avatars.dzeninfra.ru/get-zen_doc/1711960/pub_5e88ce2901822a01b722c6a5_5e88dadb13cc2b78dcfaf0b1/scale_1200",
-                                    caption:"Красава, не опозорился\nМожешь ввести новое упражнение, либо скачать .pdf файл", replyMarkup: IlineKeyboarding );
-                            }
-                            else
-                            {
-                                await _bot.SendTextMessageAsync(msg.Chat.Id, "Некорректный формат. Используйте: <упражнение> <вес> <повторы>.");
-                            }*/
                             break;
                         case "input_exerciseWeight":
-                            /*await _bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId-1);*/
-                            
+                            await _bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId - 1);
+
                             if (float.TryParse(msg.Text, out float weight))
                             {
                                 _usersExWeight[msg.Chat.Id] = weight;
@@ -113,22 +103,27 @@ namespace TrainBot.Services
                             {
                                 await _bot.SendTextMessageAsync(msg.Chat.Id, "Некорректный ввод. Введите число");
                             }
+
                             break;
                         case "input_exerciseReps":
                             _usersExReps[msg.From.Id] = msg.Text;
-                            /*await _bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId-1);*/
-                                if(int.TryParse(_usersExReps[msg.From.Id], out int reps))
-                                {
-                                    _exercisesService.AddExercise((int)msg.Chat.Id, (int)msg.From.Id, _usersExName[msg.From.Id], _usersExWeight[msg.From.Id], reps, DateTime.Now);
-                                    await _bot.SendPhotoAsync(msg.Chat.Id,
-                                        "https://avatars.dzeninfra.ru/get-zen_doc/1711960/pub_5e88ce2901822a01b722c6a5_5e88dadb13cc2b78dcfaf0b1/scale_1200",
-                                        caption:"Красава, не опозорился\nМожешь ввести новое упражнение, либо скачать .pdf файл", replyMarkup: IlineKeyboarding );
+                            _bot.DeleteMessageAsync(msg.Chat.Id, msg.MessageId - 1);
+                            if (int.TryParse(_usersExReps[msg.From.Id], out int reps))
+                            {
+                                _exercisesService.AddExercise((int)msg.Chat.Id, (int)msg.From.Id,
+                                    _usersExName[msg.From.Id], _usersExWeight[msg.From.Id], reps, DateTime.Now);
+                                await _bot.SendPhotoAsync(msg.Chat.Id,
+                                    "https://avatars.dzeninfra.ru/get-zen_doc/1711960/pub_5e88ce2901822a01b722c6a5_5e88dadb13cc2b78dcfaf0b1/scale_1200",
+                                    caption:
+                                    "Красава, не опозорился\nМожешь ввести новое упражнение, либо скачать .pdf файл",
+                                    replyMarkup: IlineKeyboarding);
                             }
                             else
                             {
                                 await _bot.SendTextMessageAsync(msg.Chat.Id, "Некорректный ввод.Введите целое число");
                                 return;
                             }
+
                             break;
 
                         default:

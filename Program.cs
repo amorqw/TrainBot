@@ -8,9 +8,6 @@ using TrainBot.Data;
 using TrainBot.Services;
 
 using var cts = new CancellationTokenSource();
-var config = Config.LoadConfig();
-var bot = new TelegramBotClient(config.TelegramBotToken, cancellationToken: cts.Token);
-var me = await bot.GetMeAsync(); 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +15,11 @@ builder.Configuration
     .AddJsonFile("appsettings.json")
     .AddUserSecrets<Program>();
 
-builder.Services.AddScoped<ITelegramBotClient>(_ => new TelegramBotClient(builder.Configuration["TelegramBotToken"]));
+var telegramBotToken = builder.Configuration["TelegramBotToken"];
+var bot = new TelegramBotClient(telegramBotToken, cancellationToken: cts.Token);
+var me = await bot.GetMeAsync(); 
+
+builder.Services.AddScoped<ITelegramBotClient>(_ => bot);
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseMySql(builder.Configuration.GetConnectionString("ConnectionStringss"), 
         new MySqlServerVersion(new Version(9, 0, 1))));
