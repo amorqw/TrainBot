@@ -4,22 +4,23 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-	    <UserSecretsId>TrainBotSecrets</UserSecretsId>
+        <UserSecretsId>TrainBotSecrets</UserSecretsId>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="itext" Version="8.0.5" />
-      <PackageReference Include="itext.bouncy-castle-adapter" Version="8.0.5" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="MySql.Data" Version="9.0.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-      <PackageReference Include="Telegram.Bot" Version="20.0.0-alpha.1" />
+        <PackageReference Include="itext" Version="8.0.5" />
+        <PackageReference Include="itext.bouncy-castle-adapter" Version="8.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="MySql.Data" Version="9.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+        <PackageReference Include="Telegram.Bot" Version="20.0.0-alpha.1" />
+        <PackageReference Include="Microsoft.AspNetCore.App" Version="8.0.0" />
     </ItemGroup>
 
 </Project>
