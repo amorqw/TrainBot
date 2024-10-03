@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TrainBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac5accc98f088d3d8e9e7bbd09b431cb29da1ce5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f5e23aa912f94452cae42dae55190ca73e5591e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TrainBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TrainBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
