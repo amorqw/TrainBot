@@ -4,7 +4,7 @@ COPY TrainBot.csproj ./
 RUN dotner restore
 COPY . ./
 RUN dotnet publish -c Release -o TrainBot
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS build
 WORKDIR /app
 COPY --from=build /app/TrainBot ./
 EXPOSE 8080
