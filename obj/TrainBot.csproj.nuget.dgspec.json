@@ -70,7 +70,7 @@
             },
             "Telegram.Bot": {
               "target": "Package",
-              "version": "[20.0.0-alpha.1, )"
+              "version": "[21.11.0, )"
             },
             "itext": {
               "target": "Package",
